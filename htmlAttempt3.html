@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consistent 4 Quadrant GUI</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+            background-color: #f0f0f0;
+        }
+
+        .header {
+            background-color: #333;
+            color: white;
+            padding: 5px 10px;
+            font-size: 0.9em;
+            text-align: center;
+        }
+
+        .quadrant-container {
+            display: flex;
+            flex-direction: column; /* Stacks the rows vertically */
+            flex-grow: 1;
+            width: 100%;
+        }
+
+        .quadrant-row {
+            display: flex;
+            flex-basis: 50%; /* Each row takes 50% of the height */
+            width: 100%;
+        }
+
+        .quadrant {
+            border: 1px solid #ccc;
+            flex-basis: 50%; /* Each quadrant takes 50% of the width */
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            
+            /* Consistent Background Design */
+            background-color: #808080; /* Gray background for consistency */
+            color: white; /* White text for contrast */
+        }
+
+        .quadrant-header {
+            background-color: #6a6a6a; /* Darker gray for header */
+            padding: 8px;
+            font-weight: bold;
+            border-bottom: 1px solid #999;
+            color: white;
+        }
+
+        .quadrant-content {
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            overflow: auto;
+            
+            /* Consistent Placeholder Text Style */
+            font-size: 1.5em; 
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">2x2 Consistent Quadrant GUI</div>
+
+    <div class="quadrant-container">
+        <div class="quadrant-row">
+            <div class="quadrant" id="quadrant1">
+                <div class="quadrant-header">Quadrant 1: Video Feed A</div>
+                <div class="quadrant-content">
+                    <p>Placeholder: Live Stream Data</p>
+                </div>
+            </div>
+            <div class="quadrant" id="quadrant2">
+                <div class="quadrant-header">Quadrant 2: Video Feed B</div>
+                <div class="quadrant-content">
+                    <p>Placeholder: Live Stream Data</p>
+                </div>
+            </div>
+        </div>
+        <div class="quadrant-row">
+            <div class="quadrant" id="quadrant3">
+                <div class="quadrant-header">Quadrant 3: Map/Controls</div>
+                <div class="quadrant-content">
+                    <p>Placeholder: Live Stream Data</p>
+                </div>
+            </div>
+            <div class="quadrant" id="quadrant4">
+                <div class="quadrant-header">Quadrant 4: Console/Logs</div>
+                <div class="quadrant-content">
+                    <p>Placeholder: Live Stream Data</p>
+		            </div>
+            <div class="quadrant" id="quadrant2">
+                <div class="quadrant-header">Quadrant 2: Controls</div>
+                <div class="quadrant-content">
+                    <button class="control-button" id="forward">Forward</button>
+                    <button class="control-button" id="left">Left</button>
+                    <button class="control-button" id="start">Start</button>
+                    <button class="control-button" id="stop">Stop</button>
+                    <button class="control-button" id="right">Right</button>
+                    <button class="control-button" id="backward">Backward</button>
+                </div>
+            </div>
+        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

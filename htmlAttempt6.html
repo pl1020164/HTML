@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fixed 4 Quadrant GUI Controls</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+            background-color: #f0f0f0;
+        }
+
+        .header {
+            background-color: #333;
+            color: white;
+            padding: 5px 10px;
+            font-size: 0.9em;
+            text-align: center;
+        }
+
+        .quadrant-container {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            width: 100%;
+        }
+
+        .quadrant-row {
+            display: flex;
+            flex-basis: 50%;
+            width: 100%;
+        }
+
+        .quadrant {
+            border: 1px solid #ccc;
+            flex-basis: 50%;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            background-color: #808080; /* Consistent Gray Theme */
+            color: white;
+        }
+
+        .quadrant-header {
+            background-color: #6a6a6a; /* Darker gray for header */
+            padding: 8px;
+            font-weight: bold;
+            border-bottom: 1px solid #999;
+            color: white;
+        }
+
+        .quadrant-content {
+            flex-grow: 1;
+            display: flex; /* Kept flex for centering other content */
+            justify-content: center;
+            align-items: center;
+            padding: 10px;
+            overflow: auto;
+        }
+
+        /* --- Specific Content Styles --- */
+
+        /* Quadrant 1 & 3: Video Placeholders */
+        #quadrant1 .quadrant-content p,
+        #quadrant3 .quadrant-content p {
+            font-size: 1.5em;
+            font-style: italic;
+            color: #d0d0d0;
+        }
+
+        /* Quadrant 2: Controls - FIX APPLIED HERE */
+        #quadrant2 .quadrant-content {
+            display: grid; 
+            /* Grid definition is more specific to fix layout issues */
+            grid-template-areas:
+                ". forward ."
+                "left center right" /* Changed start/stop area to 'center' */
+                ". backward .";
+            
+            /* The FIX: Define a minimum size for the center columns (auto for buttons) */
+            /* 1fr | 120px (Left button) | 1fr (Spacer) | 120px (Right button) | 1fr */
+            grid-template-columns: 1fr minmax(100px, auto) minmax(150px, auto) minmax(100px, auto) 1fr;
+            
+            /* 3 rows: 1fr | auto (buttons) | 1fr */
+            grid-template-rows: 1fr auto auto 1fr;
+            
+            gap: 15px;
+            padding: 20px;
+            background-color: #808080;
+        }
+        
+        /* A new wrapper is needed for START/STOP since they share a cell in the grid */
+        .center-controls {
+            grid-area: center; /* This div now fills the 'center' grid area */
+            display: flex;
+            justify-content: space-around; /* Distribute space between Start and Stop */
+            gap: 15px;
+            padding: 0 20px; /* Optional padding for visual alignment */
+        }
+        
+        .control-button {
+            background-color: #e0e0e0;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1em;
+            cursor: pointer;
+            border-radius: 5px;
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+            transition: background-color 0.2s;
+            min-width: 100px; /* Ensure a minimum size */
+            text-align: center;
+            color: #333;
+        }
+
+        .control-button:hover {
+            background-color: #d0d0d0;
+        }
+        
+        /* Grid Area Assignments */
+        #forward { grid-area: forward; }
+        #left { grid-area: left; }
+        /* START and STOP are now inside .center-controls, which occupies the 'center' area */
+        #right { grid-area: right; }
+        #backward { grid-area: backward; }
+
+        /* Quadrant 4: Console */
+        #quadrant4 .quadrant-content {
+            background-color: black;
+            color: #0f0;
+            font-family: 'Courier New', Courier, monospace;
+            text-align: left;
+            align-items: flex-start;
+            overflow-y: scroll;
+            white-space: pre-wrap;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">4 Quadrant GUI (2x2 with Fixed Controls and Consistent Theme)</div>
+
+    <div class="quadrant-container">
+        <div class="quadrant-row">
+            <div class="quadrant" id="quadrant1">
+                <div class="quadrant-header">Quadrant 1: Video</div>
+                <div class="quadrant-content">
+                    <p>Video Placeholder 1</p>
+                </div>
+            </div>
+            <div class="quadrant" id="quadrant2">
+                <div class="quadrant-header">Quadrant 2: Controls</div>
+                <div class="quadrant-content">
+                    <button class="control-button" id="forward">Forward</button>
+                    <button class="control-button" id="left">Left</button>
+                    
+                    <div class="center-controls">
+                        <button class="control-button" id="start">Start</button>
+                        <button class="control-button" id="stop">Stop</button>
+                    </div>
+                    
+                    <button class="control-button" id="right">Right</button>
+                    <button class="control-button" id="backward">Backward</button>
+                </div>
+            </div>
+        </div>
+        <div class="quadrant-row">
+            <div class="quadrant" id="quadrant3">
+                <div class="quadrant-header">Quadrant 3: Video</div>
+                <div class="quadrant-content">
+                    <p>Video Placeholder 2</p>
+                </div>
+            </div>
+            <div class="quadrant" id="quadrant4">
+                <div class="quadrant-header">Quadrant 4: Console</div>
+                <div class="quadrant-content">
+                    <pre>
+> Initializing system...
+> Connection established.
+> Waiting for commands.
+> Command: Start
+> System active.
+> Current status: OK
+                    </pre>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
